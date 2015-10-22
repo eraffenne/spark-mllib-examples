@@ -2,7 +2,7 @@ package offline.classification
 
 import org.apache.spark.mllib.classification._
 import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
-import org.apache.spark.mllib.optimization.{GradientDescent, LBFGS, SquaredL2Updater}
+import org.apache.spark.mllib.optimization.{GradientDescent, SquaredL2Updater}
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.rdd.RDD
 import utils.{Scoring, Data}
@@ -46,6 +46,4 @@ object BinaryClassifiers {
         val lrMetrics: BinaryClassificationMetrics = new BinaryClassificationMetrics(lrScoreLabel)
         println(s"LR AUC: ${lrMetrics.areaUnderROC()}")
     }
-
-
 }
