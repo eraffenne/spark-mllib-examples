@@ -4,7 +4,7 @@ import org.apache.spark.mllib.evaluation.RegressionMetrics
 import org.apache.spark.mllib.optimization.SquaredL2Updater
 import org.apache.spark.mllib.regression._
 import org.apache.spark.rdd.RDD
-import utils.{Scoring, Data}
+import utils.{Functions, Data}
 
 object Regressors {
 
@@ -19,7 +19,7 @@ object Regressors {
 
         // Linear Least Square Regression
         val model: LinearRegressionModel = LinearRegressionWithSGD.train(trainingSet, iterations)
-        val regPredValue: RDD[(Double, Double)] = Scoring.scoresAndLabels(testSet, model.predict)
+        val regPredValue: RDD[(Double, Double)] = Functions.scoresAndLabels(testSet, model.predict)
 
         val metrics: RegressionMetrics = new RegressionMetrics(regPredValue)
         println("\n--- Linear least square")
@@ -28,7 +28,7 @@ object Regressors {
 
         // Lasso (L1) regression
         val lassoModel = LassoWithSGD.train(trainingSet, iterations, stepSize, lambda)
-        val lassoPredValue: RDD[(Double, Double)] = Scoring.scoresAndLabels(testSet, lassoModel.predict)
+        val lassoPredValue: RDD[(Double, Double)] = Functions.scoresAndLabels(testSet, lassoModel.predict)
 
         val lassoMetrics: RegressionMetrics = new RegressionMetrics(lassoPredValue)
         println("\n--- Lasso (L1)")
@@ -38,7 +38,7 @@ object Regressors {
 
         // Ridge (L2) regression
         val ridgeModel = RidgeRegressionWithSGD.train(trainingSet, iterations, stepSize, lambda)
-        val ridgePredValue: RDD[(Double, Double)] = Scoring.scoresAndLabels(testSet, ridgeModel.predict)
+        val ridgePredValue: RDD[(Double, Double)] = Functions.scoresAndLabels(testSet, ridgeModel.predict)
 
         val ridgeMetrics: RegressionMetrics = new RegressionMetrics(ridgePredValue)
         println("\n--- Ridge (L2)")

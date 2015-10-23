@@ -5,7 +5,7 @@ import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
 import org.apache.spark.mllib.optimization.{GradientDescent, SquaredL2Updater}
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.rdd.RDD
-import utils.{Scoring, Data}
+import utils.{Functions, Data}
 
 object BinaryClassifiers {
 
@@ -27,7 +27,7 @@ object BinaryClassifiers {
                 .setUpdater(regularization)
 
         val svmModel: SVMModel = svm.run(trainingSet)
-        val svmScoreLabel: RDD[(Double, Double)] = Scoring.scoresAndLabels(testSet, svmModel.predict)
+        val svmScoreLabel: RDD[(Double, Double)] = Functions.scoresAndLabels(testSet, svmModel.predict)
 
         val svmMetrics: BinaryClassificationMetrics = new BinaryClassificationMetrics(svmScoreLabel)
         println(s"SVM AUC: ${svmMetrics.areaUnderROC()}")
@@ -41,7 +41,7 @@ object BinaryClassifiers {
                 .setUpdater(regularization)
 
         val lrModel: LogisticRegressionModel = lr.run(trainingSet)
-        val lrScoreLabel: RDD[(Double, Double)] = Scoring.scoresAndLabels(testSet, lrModel.predict)
+        val lrScoreLabel: RDD[(Double, Double)] = Functions.scoresAndLabels(testSet, lrModel.predict)
 
         val lrMetrics: BinaryClassificationMetrics = new BinaryClassificationMetrics(lrScoreLabel)
         println(s"LR AUC: ${lrMetrics.areaUnderROC()}")
