@@ -17,8 +17,6 @@ object MultiLabelClassifiers {
     val regularization = new SquaredL2Updater
     val numClasses = 3
 
-    // TODO: randomforest
-    // http://spark.apache.org/docs/latest/mllib-decision-tree.html
     def main(args: Array[String]) {
 
         // Training and test sets
