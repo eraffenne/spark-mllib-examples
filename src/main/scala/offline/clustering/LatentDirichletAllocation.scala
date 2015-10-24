@@ -12,10 +12,10 @@ object LatentDirichletAllocation {
 
         // LDA
         val lda: LDA = new LDA().setK(numTopics).setMaxIterations(numIterations)
-        val ldaModel: LDAModel = lda.run(Data.corpus)
+        //val ldaModel: LDAModel = lda.run(Data.corpus)
 
         println("--- LDA")
-        println(s"Number of words: ${ldaModel.vocabSize}")
+        //println(s"Number of words: ${ldaModel.vocabSize}")
 
 //        val topics = ldaModel.topicsMatrix
 //        for (topic <- Range(0, 3)) {

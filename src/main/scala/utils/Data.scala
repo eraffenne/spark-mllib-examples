@@ -29,7 +29,10 @@ object Data {
 
     val points = Constants.sc.textFile(Constants.sparkHome + "/data/mllib/kmeans_data.txt").map(parseVector)
 
-    val corpus = Constants.sc.textFile(Constants.sparkHome + "/data/mllib/sample_lda_data.txt").map(parseVector).zipWithIndex.map(_.swap)
+    val corpus = Constants.sc.textFile(Constants.sparkHome + "/data/mllib/sample_lda_data.txt")
+            .map(parseVector)
+            // .zipWithIndex FIXME
+            // .map(_.swap)
 
     private def parseDataset(path: String): RDD[LabeledPoint] = {
         Constants.sc.textFile(path).map { line =>

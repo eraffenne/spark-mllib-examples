@@ -11,7 +11,6 @@ object Regressors {
     val iterations = 100
     val stepSize = 1.0
     val lambda = 0.05
-    val regularization = new SquaredL2Updater
 
     def main(args: Array[String]) {
 
