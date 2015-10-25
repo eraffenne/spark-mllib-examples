@@ -2,6 +2,14 @@ package algos.frequentItems
 
 object FreqItemMiner {
 
-    // TODO: implement
+    def main(args: Array[String]) {
+        // TODO: implement using baskets RDD
+
+        // FP-Growth
+
+
+        // Association Rules
+
+    }
 
 }

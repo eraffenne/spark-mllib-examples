@@ -32,6 +32,9 @@ object Datasets {
     val corpus = Constants.sc.textFile(Constants.sparkHome + "/data/mllib/sample_lda_data.txt")
             .map(parseVector)
 
+    val baskets = Constants.sc.textFile(Constants.sparkHome + "/data/mllib/sample_fpgrowth.txt")
+            .map(s => s.trim.split(' '))
+
     private def parseDataset(path: String): RDD[LabeledPoint] = {
         Constants.sc.textFile(path).map { line =>
             val parts = line.split(',')
