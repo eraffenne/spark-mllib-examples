@@ -1,4 +1,4 @@
-package offline.classification
+package algos.classification
 
 import org.apache.spark.mllib.classification._
 import org.apache.spark.mllib.evaluation.MulticlassMetrics
@@ -7,7 +7,7 @@ import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.tree.RandomForest
 import org.apache.spark.mllib.tree.model.RandomForestModel
 import org.apache.spark.rdd.RDD
-import utils.{Functions, Data}
+import utils.{Functions, Datasets}
 
 object MultiClassifiers {
 
@@ -19,7 +19,7 @@ object MultiClassifiers {
     def main(args: Array[String]) {
 
         // Training and test sets
-        val Array(trainingSet: RDD[LabeledPoint], testSet: RDD[LabeledPoint]) = Data.multiLabeledPoints.randomSplit(Array(0.7, 0.3), seed = 13L)
+        val Array(trainingSet: RDD[LabeledPoint], testSet: RDD[LabeledPoint]) = Datasets.multiLabeledPoints.randomSplit(Array(0.7, 0.3), seed = 13L)
 
         // Logistic Regression
         val lr: LogisticRegressionWithLBFGS = new LogisticRegressionWithLBFGS()

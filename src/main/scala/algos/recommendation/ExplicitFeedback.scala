@@ -1,8 +1,8 @@
-package offline.recommendation
+package algos.recommendation
 
 import org.apache.spark.mllib.recommendation.{MatrixFactorizationModel, ALS}
 import org.apache.spark.rdd.RDD
-import utils.{Functions, Data}
+import utils.{Functions, Datasets}
 
 object ExplicitFeedback {
 
@@ -21,15 +21,15 @@ object ExplicitFeedback {
                 .setLambda(lambda)
                 .setRank(rank)
 
-        val model: MatrixFactorizationModel = als.run(Data.ratings)
+        val model: MatrixFactorizationModel = als.run(Datasets.ratings)
 
-        val testSet: RDD[(Int, Int)] = Data.ratings.map { rating =>
+        val testSet: RDD[(Int, Int)] = Datasets.ratings.map { rating =>
             (rating.user, rating.product)
         }
 
         val predictions: RDD[((Int, Int), Double)] = model.predict(testSet).map(Functions.ratingToPair)
 
-        val mse: Double = Data.ratings.map(Functions.ratingToPair).join(predictions).map { case (key, value) =>
+        val mse: Double = Datasets.ratings.map(Functions.ratingToPair).join(predictions).map { case (key, value) =>
             math.pow( value._1 - value._2, 2.0)
         }.mean()
         val rmse: Double = math.sqrt(mse)

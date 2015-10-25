@@ -1,8 +1,8 @@
-package offline.recommendation
+package algos.recommendation
 
 import org.apache.spark.mllib.recommendation.{Rating, MatrixFactorizationModel, ALS}
 import org.apache.spark.rdd.RDD
-import utils.{Functions, Data}
+import utils.{Functions, Datasets}
 
 object ImplicitFeedback {
     def main(args: Array[String]) {
@@ -20,15 +20,15 @@ object ImplicitFeedback {
                 .setLambda(lambda)
                 .setRank(rank)
 
-        val model: MatrixFactorizationModel = als.run(Data.confidences)
+        val model: MatrixFactorizationModel = als.run(Datasets.confidences)
 
-        val testSet: RDD[(Int, Int)] = Data.confidences.map { r =>
+        val testSet: RDD[(Int, Int)] = Datasets.confidences.map { r =>
             (r.user, r.product)
         }
 
         val predictions: RDD[((Int, Int), Double)] = model.predict(testSet).map(Functions.ratingToPair)
 
-        val rateAndPreds = Data.confidences.map(Functions.ratingToPair).join(predictions)
+        val rateAndPreds = Datasets.confidences.map(Functions.ratingToPair).join(predictions)
 
         println("\n--- ALS with implicit feedback")
         rateAndPreds.collect().foreach { case (key, value) =>

@@ -1,7 +1,7 @@
-package offline.clustering
+package algos.clustering
 
 import org.apache.spark.mllib.clustering.{GaussianMixture, KMeans, KMeansModel}
-import utils.Data
+import utils.Datasets
 
 object Kmeans {
 
@@ -17,8 +17,8 @@ object Kmeans {
                 .setK(numClusters)
                 .setMaxIterations(numIterations)
 
-        val clusters: KMeansModel = kmeans.run(Data.points)
-        val wssse: Double = clusters.computeCost(Data.points)
+        val clusters: KMeansModel = kmeans.run(Datasets.points)
+        val wssse: Double = clusters.computeCost(Datasets.points)
 
         println(s"--- Kmeans WSSSE: $wssse")
     }

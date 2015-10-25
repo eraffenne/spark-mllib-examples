@@ -1,4 +1,4 @@
-package online.classification
+package onlineLearning.classification
 
 object StreamingLR {
 

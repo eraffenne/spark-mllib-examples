@@ -1,10 +1,10 @@
-package online.regression
+package onlineLearning.regression
 
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression._
 import utils.Constants
 
-object StreamRegressor {
+object StreamingLinearReg {
 
     val iterations = 100
 

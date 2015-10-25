@@ -1,4 +1,4 @@
-package common
+package others
 
 import org.apache.spark.mllib.linalg.distributed._
 import org.apache.spark.mllib.linalg.{Matrices, Matrix, Vector, Vectors}

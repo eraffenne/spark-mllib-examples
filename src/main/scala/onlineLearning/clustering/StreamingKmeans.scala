@@ -1,4 +1,4 @@
-package online.clustering
+package onlineLearning.clustering
 
 import org.apache.spark.mllib.clustering.StreamingKMeans
 import org.apache.spark.mllib.linalg.Vectors

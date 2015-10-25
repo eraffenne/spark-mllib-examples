@@ -1,7 +1,7 @@
-package offline.clustering
+package algos.clustering
 
 import org.apache.spark.mllib.clustering.{LDAModel, LDA}
-import utils.Data
+import utils.Datasets
 
 object LatentDirichletAllocation {
 

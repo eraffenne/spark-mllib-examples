@@ -1,11 +1,11 @@
-package offline.classification
+package algos.classification
 
 import org.apache.spark.mllib.classification._
 import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
 import org.apache.spark.mllib.optimization.{GradientDescent, SquaredL2Updater}
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.rdd.RDD
-import utils.{Functions, Data}
+import utils.{Functions, Datasets}
 
 object BinaryClassifiers {
 
@@ -16,7 +16,7 @@ object BinaryClassifiers {
     def main(args: Array[String]) {
 
         // Training and test sets
-        val Array(trainingSet: RDD[LabeledPoint], testSet: RDD[LabeledPoint]) = Data.binaryLabeledPoints.randomSplit(Array(0.7, 0.3), seed = 13L)
+        val Array(trainingSet: RDD[LabeledPoint], testSet: RDD[LabeledPoint]) = Datasets.binaryLabeledPoints.randomSplit(Array(0.7, 0.3), seed = 13L)
 
         // SVM
         val svm: SVMWithSGD = new SVMWithSGD()

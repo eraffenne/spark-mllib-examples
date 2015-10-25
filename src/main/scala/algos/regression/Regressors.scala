@@ -1,10 +1,10 @@
-package offline.regression
+package algos.regression
 
 import org.apache.spark.mllib.evaluation.RegressionMetrics
 import org.apache.spark.mllib.optimization.SquaredL2Updater
 import org.apache.spark.mllib.regression._
 import org.apache.spark.rdd.RDD
-import utils.{Functions, Data}
+import utils.{Functions, Datasets}
 
 object Regressors {
 
@@ -14,7 +14,7 @@ object Regressors {
 
     def main(args: Array[String]) {
 
-        val Array(trainingSet: RDD[LabeledPoint], testSet: RDD[LabeledPoint]) = Data.regressionLabeledPoints.randomSplit(Array(0.7, 0.3), seed = 13L)
+        val Array(trainingSet: RDD[LabeledPoint], testSet: RDD[LabeledPoint]) = Datasets.regressionLabeledPoints.randomSplit(Array(0.7, 0.3), seed = 13L)
 
         // Linear Least Square Regression
         val model: LinearRegressionModel = LinearRegressionWithSGD.train(trainingSet, iterations)
