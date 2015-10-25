@@ -31,8 +31,6 @@ object Datasets {
 
     val corpus = Constants.sc.textFile(Constants.sparkHome + "/data/mllib/sample_lda_data.txt")
             .map(parseVector)
-            // .zipWithIndex FIXME
-            // .map(_.swap)
 
     private def parseDataset(path: String): RDD[LabeledPoint] = {
         Constants.sc.textFile(path).map { line =>
