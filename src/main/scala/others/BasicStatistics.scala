@@ -2,7 +2,7 @@ package others
 
 import org.apache.spark.mllib.linalg.{Matrix, Vectors}
 import org.apache.spark.mllib.stat.test.{ChiSqTestResult, KolmogorovSmirnovTestResult}
-import org.apache.spark.mllib.stat.{KernelDensity, Statistics}
+import org.apache.spark.mllib.stat.{MultivariateStatisticalSummary, KernelDensity, Statistics}
 import org.apache.spark.rdd.RDD
 import utils.Constants
 
@@ -13,7 +13,7 @@ object BasicStatistics {
     def main(args: Array[String]) {
 
         // --- Summary
-        val stats = Statistics.colStats(Constants.vectorRDD)
+        val stats: MultivariateStatisticalSummary = Statistics.colStats(Constants.vectorRDD)
 
         println("\n--- Basic Statistics on vectorRDD")
         println(s"\tCount: ${stats.count}")
@@ -66,7 +66,7 @@ object BasicStatistics {
         val ksTest: KolmogorovSmirnovTestResult = Statistics.kolmogorovSmirnovTest(Constants.normalRDD, "norm", 0, 1)
         println(s"\n--- Kolmogoros-Smirnov test:\n $ksTest")
 
-        // --- Kernel density estimation (bandwith = standard deviation)
+        // --- Kernel density estimation (bandwidth = standard deviation)
         val kernelDensity: KernelDensity = new KernelDensity().setSample(Constants.normalRDD).setBandwidth(1.0)
         val densities: Array[Double] = kernelDensity.estimate( Array(1.0, 0, -0.2, 15.8) )
         println(s"\n--- Kernel density estimation:\n ${densities.toList}")
