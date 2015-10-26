@@ -1,12 +1,11 @@
 package algos.regression
 
 import org.apache.spark.mllib.evaluation.RegressionMetrics
-import org.apache.spark.mllib.optimization.SquaredL2Updater
 import org.apache.spark.mllib.regression._
 import org.apache.spark.rdd.RDD
 import utils.{Functions, Datasets}
 
-object Regressors {
+object LinearRegressors {
 
     val iterations = 100
     val stepSize = 1.0
