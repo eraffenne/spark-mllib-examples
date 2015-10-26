@@ -1,6 +1,6 @@
 package algos.recommendation
 
-import org.apache.spark.mllib.recommendation.{Rating, MatrixFactorizationModel, ALS}
+import org.apache.spark.mllib.recommendation.{MatrixFactorizationModel, ALS}
 import org.apache.spark.rdd.RDD
 import utils.{Functions, Datasets}
 
@@ -12,7 +12,6 @@ object ImplicitFeedback {
         val alpha: Double = 0.01
         val lambda: Double = 0.01
 
-        // Explicit feedback
         val als: ALS = new ALS()
                 .setAlpha(alpha)
                 .setImplicitPrefs(true)
@@ -35,5 +34,6 @@ object ImplicitFeedback {
             println(s"\t$key: $value")
         }
 
+        // To use RankingMetrics, normalize the dataset
     }
 }

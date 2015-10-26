@@ -18,7 +18,7 @@ object Datasets {
     val ratings = Constants.sc.textFile(Constants.sparkHome + "/data/mllib/als/test.data").map {
         line =>
             val parts = line.split(",")
-            new Rating(parts(0).toInt, parts(1).toInt, parts(2).toDouble)
+            new Rating(parts(0).toInt, parts(1).toInt, parts(2).toDouble - 2.5)
     }
 
     val confidences = Constants.sc.textFile("data/sample_als_implicit.txt").map {
