@@ -9,7 +9,13 @@ import org.apache.spark.rdd.RDD
 
 object Datasets {
 
-    val binaryLabeledPoints = MLUtils.loadLibSVMFile(Constants.sc, Constants.sparkHome + "/data/mllib/sample_libsvm_data.txt")
+    val binaryLabeledPoints: RDD[LabeledPoint] = Constants.sc.textFile(Constants.sparkHome + "/data/mllib/sample_svm_data.txt").map {
+        line =>
+            val parts = line.split(" ").toList
+            val label = parts.head.toDouble
+            val vector = Vectors.dense(parts.tail.map(_.toDouble).toArray)
+            new LabeledPoint(label, vector)
+    }
 
     val multiLabeledPoints = MLUtils.loadLibSVMFile(Constants.sc, "data/sample_multiclass_classification_data.txt")
 
