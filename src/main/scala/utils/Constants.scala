@@ -4,8 +4,8 @@ import org.apache.spark.mllib.linalg.{Matrices, Matrix, Vectors}
 import org.apache.spark.mllib.random.RandomRDDs
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.rdd.RDD
-import org.apache.spark.sql.catalyst.expressions.Second
-import org.apache.spark.streaming.{Seconds, Duration, StreamingContext}
+import org.apache.spark.sql.SQLContext
+import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.{SparkConf, SparkContext}
 
 import scala.util.Random
@@ -18,6 +18,7 @@ object Constants {
     // Getting contexts
     val conf: SparkConf = new SparkConf().setAppName("Spark MLlib examples").setMaster(Constants.master)
     val sc: SparkContext = new SparkContext(conf)
+    val sqlc: SQLContext = new SQLContext(sc)
     val ssc: StreamingContext = new StreamingContext(sc, Seconds(20))
 
     // A few convenient RDDs
