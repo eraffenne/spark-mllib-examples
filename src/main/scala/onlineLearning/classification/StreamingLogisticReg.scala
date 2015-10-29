@@ -8,6 +8,7 @@ import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming.dstream.DStream
 import utils.{Constants, Datasets}
+import org.apache.log4j.{Logger, Level}
 
 object StreamingLogisticReg {
 
@@ -16,6 +17,8 @@ object StreamingLogisticReg {
     val outputDir = "data/streaming/predictions"
 
     def main(args: Array[String]) {
+        val logger = Logger.getRootLogger
+        logger.setLevel(Level.INFO)
 
 
         // Write some files to initiate the process
